@@ -1,5 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import { RouteParams } from '@angular/router-deprecated';
 import {Hero} from '../hero';
+import { HeroService } from '../services/hero.service';
 
 @Component({
   moduleId: module.id,
@@ -7,9 +9,24 @@ import {Hero} from '../hero';
   templateUrl: 'hero-detail.component.html',
   styleUrls: ['hero-detail.component.css']
 })
-export class HeroDetailComponent {
-  constructor() {}
+export class HeroDetailComponent implements OnInit {
+
+  constructor(
+    private heroService: HeroService,
+    private routeParams: RouteParams) {
+  }
 
   @Input()
   hero: Hero;
+
+  ngOnInit() {
+    let id = +this.routeParams.get('id');
+    this.heroService.getHero(id)
+      .then(hero => this.hero = hero);
+  }
+
+  goBack() {
+    window.history.back();
+  }
+
 }

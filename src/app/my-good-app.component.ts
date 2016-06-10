@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 import {Hero} from './hero';
-import {HeroService} from './hero.service';
+import {HeroService} from './services/hero.service';
 import {HeroDetailComponent} from './hero-detail/hero-detail.component';
 import {HeroesComponent} from './heroes/heroes.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -18,6 +18,11 @@ import {DashboardComponent} from './dashboard/dashboard.component';
   providers: [ROUTER_PROVIDERS, HeroService]
 })
 @RouteConfig([
+  {
+    path: '/detail/:id',
+    name: 'HeroDetail',
+    component: HeroDetailComponent
+  },
   {
     path: '/dashboard',
     name: 'Dashboard',
