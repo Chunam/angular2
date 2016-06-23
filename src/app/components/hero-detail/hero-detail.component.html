@@ -1,0 +1,16 @@
+<div *ngIf="hero">
+  <h2>{{hero.name}} details!</h2>
+
+  <md-card>
+    <div>
+      <label>id: </label>{{hero.id}}
+    </div>
+    <div>
+      <label>name: </label>
+      <input [(ngModel)]="hero.name" placeholder="name">
+      <button md-raised-button color="blue" (click)="save()">Save</button>
+    </div>
+
+    <button md-raised-button color="blue" (click)="goBack()">Back</button>
+  </md-card>
+</div>

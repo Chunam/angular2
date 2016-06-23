@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router-deprecated';
+import { Router, Routes, ROUTER_DIRECTIVES} from '@angular/router';
 
 import {Hero} from '../hero';
 import {HeroService} from '../services/hero.service';
@@ -18,7 +18,7 @@ export class HeroesComponent implements OnInit {
   heroes: Hero[];
 
   getHeroes() {
-    this.heroService.getHeroes().then(
+    this.heroService.getHeroes().subscribe(
       heroes => this.heroes = heroes, fail => console.error('fail to retrieve datas'));
   }
 
@@ -27,6 +27,6 @@ export class HeroesComponent implements OnInit {
   onSelect(hero: Hero) { this.selectedHero = hero; }
 
   gotoDetail() {
-    this.router.navigate(['HeroDetail', { id: this.selectedHero.id }]);
+    this.router.navigate(['/detail/', this.selectedHero.id ]);
   }
 }
