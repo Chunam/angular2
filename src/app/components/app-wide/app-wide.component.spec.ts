@@ -2,22 +2,23 @@ import {beforeEach, beforeEachProviders, describe, expect, it, inject,} from '@a
 import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
 import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
-import {LoginComponent} from './login.component';
+import {AppWideComponent} from './app-wide.component';
 
-describe('Component: Login', () => {
+describe('Component: AppWide', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [LoginComponent]);
+  beforeEachProviders(() => [AppWideComponent]);
   beforeEach(
       inject([TestComponentBuilder], function(tcb: TestComponentBuilder) { builder = tcb; }));
 
-  it('should inject the component',
-     inject([LoginComponent], (component: LoginComponent) => { expect(component).toBeTruthy(); }));
+  it('should inject the component', inject([AppWideComponent], (component: AppWideComponent) => {
+       expect(component).toBeTruthy();
+     }));
 
   it('should create the component', inject([], () => {
-       return builder.createAsync(LoginComponentTestController)
+       return builder.createAsync(AppWideComponentTestController)
            .then((fixture: ComponentFixture<any>) => {
-             let query = fixture.debugElement.query(By.directive(LoginComponent));
+             let query = fixture.debugElement.query(By.directive(AppWideComponent));
              expect(query).toBeTruthy();
              expect(query.componentInstance).toBeTruthy();
            });
@@ -27,9 +28,9 @@ describe('Component: Login', () => {
 @Component({
   selector: 'test',
   template: `
-    <app-login></app-login>
+    <app-app-wide></app-app-wide>
   `,
-  directives: [LoginComponent]
+  directives: [AppWideComponent]
 })
-class LoginComponentTestController {
+class AppWideComponentTestController {
 }

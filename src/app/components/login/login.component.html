@@ -1,3 +1,18 @@
-<p>
-  login works!
-</p>
+<app-login>
+  <div class="container">
+    <div class="login-ctn">
+      <h1>Login Form</h1>
+      <form>
+        <div class="form-group">
+          <label for="name">UserName</label>
+          <input type="text" name="name" [(ngModel)]="userName" class="form-control" required >
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" class="form-control" [(ngModel)]="password">
+        </div>
+        <button type="button" class="btn btn-default" (click)="login()">Submit</button>
+      </form>
+    </div>
+  </div>
+</app-login>

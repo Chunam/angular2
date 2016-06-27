@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import { Router, Routes, ROUTER_DIRECTIVES} from '@angular/router';
+import {ROUTER_DIRECTIVES, Router} from '@angular/router';
 
-import {Hero} from '../hero';
-import {HeroService} from '../services/hero.service';
+import {Hero} from '../../hero';
+import {HeroService} from '../../services/hero.service';
+import {Logger} from '../../services/logger.service';
 
 @Component({
   moduleId: module.id,
@@ -12,7 +13,10 @@ import {HeroService} from '../services/hero.service';
   directives: []
 })
 export class HeroesComponent implements OnInit {
-  constructor(private router: Router, private heroService: HeroService) { }
+  constructor(private router: Router, private heroService: HeroService, private log: Logger) {
+    log.info('Instantiating HeroesComponent');
+  }
+
 
   selectedHero: Hero;
   heroes: Hero[];
@@ -26,7 +30,5 @@ export class HeroesComponent implements OnInit {
 
   onSelect(hero: Hero) { this.selectedHero = hero; }
 
-  gotoDetail() {
-    this.router.navigate(['/detail/', this.selectedHero.id ]);
-  }
+  gotoDetail() { this.router.navigate(['/hero/', this.selectedHero.id]); }
 }

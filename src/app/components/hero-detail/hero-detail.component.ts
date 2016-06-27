@@ -1,9 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Routes, RouteSegment, ROUTER_DIRECTIVES } from '@angular/router';
-import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
-import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
-import {Hero} from '../hero';
-import { HeroService } from '../services/hero.service';
+import {ROUTER_DIRECTIVES, ActivatedRoute} from '@angular/router';
+import {MD_BUTTON_DIRECTIVES} from '@angular2-material/button';
+import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
+
+import {Hero} from '../../hero';
+import {HeroService} from '../../services/hero.service';
+import {Logger} from '../../services/logger.service';
 
 @Component({
   moduleId: module.id,
@@ -14,29 +16,29 @@ import { HeroService } from '../services/hero.service';
 })
 export class HeroDetailComponent implements OnInit {
 
-  constructor(
-    private heroService: HeroService,
-    private routeSegment: RouteSegment) {
-  }
+  constructor(private heroService: HeroService, private route: ActivatedRoute, private log: Logger) { }
 
   // @Input()
   hero: Hero;
 
   ngOnInit() {
-    let id = +this.routeSegment.getParam('id');
-    this.heroService.getHero(id)
-      // .then(
-      // hero => this.hero = hero, fail => console.error('fail to retrieve datas'));
-      .subscribe(hero => this.hero = hero);
+    // let id = +this.routeSegment.getParam('id');
+    let id = 2;
+    this.route.params
+      .map(params => params['id'])
+      .subscribe((id) => {
+        this.heroService
+          .getHero(id)          
+          .subscribe(hero => this.hero = hero);
+      });
   }
-  
-  goBack() {
-    window.history.back();
-  }
+
+  goBack() { window.history.back(); }
 
   save() {
-    this.heroService.putHero(this.hero);
-    this.goBack();
+    this.heroService.putHero(this.hero)
+    .then(hero => this.goBack())
+    .catch((resp) => this.log.error(resp.status))
+    ;
   }
-
 }

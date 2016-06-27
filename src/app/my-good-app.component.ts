@@ -1,17 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, Routes, ROUTER_DIRECTIVES/*, ROUTER_PROVIDERS*/ } from '@angular/router';
+import {ROUTER_DIRECTIVES /*, ROUTER_PROVIDERS*/, Router, RouterConfig} from '@angular/router';
+import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
 import {MD_SIDENAV_DIRECTIVES} from '@angular2-material/sidenav';
 import {MD_TOOLBAR_DIRECTIVES} from '@angular2-material/toolbar';
-import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
+
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {HeroDetailComponent} from './components/hero-detail/hero-detail.component';
+import {HeroesComponent} from './components/heroes/heroes.component';
+import {HomeComponent} from './components/home/home.component';
+import {LoginComponent} from './components/login/login.component';
 import {Hero} from './hero';
+import {AuthGuard} from './routing/auth.guard';
 import {HeroService} from './services/hero.service';
 import {Logger} from './services/logger.service';
-import {HeroDetailComponent} from './hero-detail/hero-detail.component';
-import {HeroesComponent} from './heroes/heroes.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
-import {HomeComponent} from './home/home.component';
-import {LoginComponent} from './login/login.component';
-
 
 
 
@@ -21,40 +22,15 @@ import {LoginComponent} from './login/login.component';
   directives: [ROUTER_DIRECTIVES, MD_SIDENAV_DIRECTIVES, MD_TOOLBAR_DIRECTIVES],
   templateUrl: 'my-good-app.component.html',
   styleUrls: ['my-good-app.component.css'],
-  providers: [/*ROUTER_PROVIDERS,*/ HeroService, Logger]
+  providers: [/*ROUTER_PROVIDERS,*/ HeroService]
 })
-@Routes([
-  {
-    path: '/detail/:id',
-    component: HeroDetailComponent
-  },
-  {
-    path: '/dashboard',
-    component: DashboardComponent,
-  },
-  {
-    path: '/heroes',
-    component: HeroesComponent
-  },
-  {
-    path: '',    
-    component: HomeComponent
-  },
-  {
-    path: '/login',    
-    component: LoginComponent
-  }
-])
 export class AppComponent implements OnInit {
-  
-  constructor(private router: Router) {
-    if(!this.isLogged){
-      this.router.navigate(['/login/']);
-    }
+  constructor(private router: Router, private log: Logger) {
+    log.info('Instantiating AppComponent');
   }
-  
+
   title = 'Tour of Heroes';
   private isLogged = false;
 
-  ngOnInit() {   }
+  ngOnInit() {}
 }
