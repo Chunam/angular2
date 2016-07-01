@@ -1,9 +1,49 @@
-<h2>My Heroes</h2>
-<ul class="heroes">
-  <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
-    <span class="badge">{{hero.id}}</span> {{hero.name}}
-  </li>
-</ul>
+<h3>Displaying items in differents ways</h3>
+<md-card class="md-list" color="primary" open="true">
+  <md-card-header>
+    <img md-card-avatar>
+    <md-card-title>Header title</md-card-title>
+    <md-card-subtitle>Header subtitle</md-card-subtitle>
+  </md-card-header>
+  <!--<img md-card-image src="https://material.angularjs.org/latest/img/washedout.png">-->
+  <md-card-content>
+    
+    <md-tab-group class="demo-tab-group">
+      <md-tab>
+        <template md-tab-label>
+          Vanilla
+        </template>
+        <template md-tab-content>
+          <ul class="heroes">
+            <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
+              <span class="badge">{{hero.id}}</span> {{hero.name}}
+            </li>
+          </ul>
+        </template>
+      </md-tab>
+
+      <md-tab>
+        <template md-tab-label>
+          Md list
+        </template>
+        <template md-tab-content>
+          <md-list>
+            <!--<h3 md-subheader>List with MD</h3>-->
+            <md-list-item *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)" class="hero-list-item">
+              <md-icon class="md-16 list-icon" md-list-avatar color="accent">android</md-icon>
+              <h4 md-line>{{hero.id}}</h4>
+              <p md-line>{{hero.name}}</p>
+              <p md-line *ngIf="hero.msg" class="">{{hero.msg}}</p>
+            </md-list-item>
+          </md-list>
+        </template>
+      </md-tab>
+
+    </md-tab-group>
+  </md-card-content>
+</md-card>
+
+<i></i>
 <!--<app-hero-detail [hero]="selectedHero"></app-hero-detail>-->
 <div *ngIf="selectedHero">
   <h2>

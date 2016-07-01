@@ -11,18 +11,16 @@ export class AuthService {
 
   constructor(private http: Http, private log: Logger) { log.info('Instantiating AuthService'); }
 
-  private authenticated: boolean = false;
-  private login: string = '';
-  private password: string = '';
+  authenticated: boolean = false;
+  login: string = '';
+  password: string = '';
+  permissions: string[] = [];
 
   public isAuthenticated(): boolean { return this.authenticated }
-  public getLogin(): string { return this.login }
-  public getPassword(): string { return this.password }
 
   public hasRole(roles: string[]): boolean { return false }
 
   public doLogin(userName: string, password: string) {
-    //return Observable.of<boolean>(true).delay(1000).do(val => this.authenticated = true);
     this.log.info('doLogin');
     let headers = new Headers();
     headers.append('Authorization', 'Basic ' + btoa(userName + ':' + password));
@@ -31,10 +29,13 @@ export class AuthService {
   }
 
   private processLoginResult(res: Response, userName: string, password) {
-    if (res.json().success) {
+    let data = res.json();
+    if (res.status === 200) {
       this.authenticated = true;
       this.login = userName;
       this.password = password;
+      // store permissions
+      this.permissions = data.permissions;
     }
     return this.authenticated;
   }

@@ -2,15 +2,21 @@
   <h2>{{hero.name}} details!</h2>
 
   <md-card>
-    <div>
-      <label>id: </label>{{hero.id}}
-    </div>
-    <div>
-      <label>name: </label>
-      <input [(ngModel)]="hero.name" placeholder="name">
-      <button md-raised-button color="blue" (click)="save()">Save</button>
-    </div>
+    <form ngForm>
+      <div>
+        <label>id: </label>{{hero.id}}
+      </div>
+      <div>
+        <label>name: </label>
+        <!--<input [(ngModel)]="hero.name">-->
+        <md-input placeholder="the hero&rsquo;s name" [(ngModel)]="hero.name" name="name">
+          <!--<span md-prefix>$&nbsp;</span>
+        <span md-suffix>.00</span>-->
+        </md-input>
+      </div>
 
-    <button md-raised-button color="blue" (click)="goBack()">Back</button>
+      <button md-raised-button color="primary" (click)="goBack()">Back</button>
+      <button md-raised-button color="accent" (click)="save()" *hasPermission="['EDIT_MODEL','GLOP']">Save</button>
+    </form>
   </md-card>
 </div>

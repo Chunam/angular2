@@ -22,9 +22,11 @@ bootstrap(
     disableDeprecatedForms(),
     provideForms(),
     HTTP_PROVIDERS,
-    APP_ROUTER_PROVIDERS /*, provide(LocationStrategy, { useClass: HashLocationStrategy })*/
-    ,
-    AuthService, BasiAuthHttpService, Logger, AppWideComponent
+    APP_ROUTER_PROVIDERS, /* provide(LocationStrategy, { useClass: HashLocationStrategy }), */
+    AuthService,
+    BasiAuthHttpService,
+    Logger,
+    AppWideComponent
   ]
 
 );

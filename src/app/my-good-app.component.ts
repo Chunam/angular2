@@ -19,10 +19,11 @@ import {Logger} from './services/logger.service';
 @Component({
   moduleId: module.id,
   selector: 'my-good-app-app',
-  directives: [ROUTER_DIRECTIVES, MD_SIDENAV_DIRECTIVES, MD_TOOLBAR_DIRECTIVES],
+  directives: [ROUTER_DIRECTIVES, MD_SIDENAV_DIRECTIVES, MD_TOOLBAR_DIRECTIVES, MdIcon],
   templateUrl: 'my-good-app.component.html',
   styleUrls: ['my-good-app.component.css'],
-  providers: [/*ROUTER_PROVIDERS,*/ HeroService]
+  providers: [/*ROUTER_PROVIDERS,*/ HeroService],
+  viewProviders: [MdIconRegistry]
 })
 export class AppComponent implements OnInit {
   constructor(private router: Router, private log: Logger) {

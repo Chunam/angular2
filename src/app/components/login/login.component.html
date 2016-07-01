@@ -2,16 +2,16 @@
   <div class="container">
     <div class="login-ctn">
       <h1>Login Form</h1>
-      <form>
+      <form ngForm [formGroup]="loginForm" >
         <div class="form-group">
           <label for="name">UserName</label>
-          <input type="text" name="name" [(ngModel)]="userName" class="form-control" required >
+          <input type="text" name="name" formControlName="userName" class="form-control" required />
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" name="password" class="form-control" [(ngModel)]="password">
+          <input type="password" name="password" formControlName="password" class="form-control" required />
         </div>
-        <button type="button" class="btn btn-default" (click)="login()">Submit</button>
+        <button type="submit" class="btn btn-default" [disabled]="!loginForm.valid" (click) = "login()">Submit</button>
       </form>
     </div>
   </div>

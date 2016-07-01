@@ -8,11 +8,12 @@ h2 {
   margin-top: 0;
   padding-top: 0;
 }
+
 nav a {  
   padding: 5px 10px;
   text-decoration: none;
   margin-top: 10px;
-  display: inline-block;
+  display: block;
   background-color: #eee;
   border-radius: 4px;
 }
@@ -32,23 +33,14 @@ nav a.router-link-active {
   min-width: 100px;
 }
 
-.app-icon-button {
-  box-shadow: none;
-  user-select: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  filter: none;
-  font-weight: normal;
-  height: auto;
-  line-height: inherit;
-  margin: 0;
-  min-width: 0;
-  padding: 0;
-  text-align: left;
-  text-decoration: none;
+md-sidenav-layout{
+  min-height: 100%;
 }
 
 .app-toolbar-filler {
   flex: 1 1 auto;
+}
+
+i.title{
+  margin-left: 20px;
 }

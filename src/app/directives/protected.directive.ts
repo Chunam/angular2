@@ -1,25 +1,45 @@
-import {Location} from '@angular/common';
-import {Directive, OnDestroy} from '@angular/core';
-import {Router} from '@angular/router';
+import {Directive, OnDestroy, ViewContainerRef, TemplateRef} from '@angular/core';
 
 import {AuthService} from '../services/auth.service';
+import {Logger} from '../services/logger.service';
 
-@Directive({selector: '[protected]'})
+@Directive({
+  selector: '[hasPermission]',
+  inputs: ['hasPermission', 'toto', 'titi']
+})
 export class Protected implements OnDestroy {
   private sub: any = null;
 
   constructor(
-      private authService: AuthService, private router: Router, private location: Location) {
-    if (!authService.isAuthenticated) {
-      this.router.navigate(['/login/']);
-    }
+    private authService: AuthService,
+    private log: Logger,
+    private _viewContainer: ViewContainerRef,
+    private _templateRef: TemplateRef<Object>
+  ) {
+    log.info("Instantiating Protected")
+  }
 
-    this.sub = authService.subscribe((val) => {
-      if (!val.authenticated) {
-        this.location.replaceState('/');
-        this.router.navigate(['LoggedoutPage']);
+  set hasPermission(permissions: string[]) {
+    this.log.info("Asked Permission : " + permissions);
+    let hasPermission = permissions.some(permission => {
+      if (this.authService.permissions.indexOf(permission) > -1) {
+        return true;
       }
     });
+    if (hasPermission) {
+      this._viewContainer.createEmbeddedView(this._templateRef);
+    } else {
+      this._viewContainer.clear();
+    }
+  }
+
+  set toto(toto) {
+
+    this.log.info(toto);
+  }
+
+  set titi(titi) {
+    this.log.info(titi);
   }
 
   ngOnDestroy() {

@@ -1,17 +1,22 @@
 <md-sidenav-layout>
-    <md-sidenav #sidenav mode="side" class="app-sidenav">
-        side navigation
+
+    <md-sidenav #sidenav mode="side" class="app-sidenav" mode="push" align="start" >
+        <nav>
+            <a [routerLink]="['/dashboard']" (click)="sidenav.toggle()">Dashboard</a>
+            <a [routerLink]="['/heroes']" (click)="sidenav.toggle()">Heroes</a>
+        </nav>        
+        <button md-button
+            (click)="sidenav.mode = (sidenav.mode == 'push' ? 'over' : (sidenav.mode == 'over' ? 'side' : 'push'))">Toggle Mode</button>
     </md-sidenav>
 
     <md-toolbar color="primary">
-        <button class="app-icon-button" (click)="sidenav.toggle()">
-        <i class="material-icons app-toolbar-menu">menu</i>
-        </button> Angular2 + Material2 Simple App
-        <span flex></span>
-        <nav>
-            <a [routerLink]="['/dashboard']">Dashboard</a>
-            <a [routerLink]="['/heroes']">Heroes</a>
-        </nav>
+        <!--<i class="material-icons app-toolbar-menu" (click)="sidenav.toggle()">menu</i>-->
+        <md-icon (click)="sidenav.toggle()">menu</md-icon>
+
+        <i class="title"> Angular2 + Material2 Simple App </i>
+
+        <span class="app-toolbar-filler"></span>
+        <md-icon>help</md-icon>
     </md-toolbar>
 
 

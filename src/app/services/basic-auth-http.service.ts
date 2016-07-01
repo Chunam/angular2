@@ -36,7 +36,8 @@ export class BasiAuthHttpService {
             headers = new Headers();
             options.headers = headers;
         }        
-        headers.append('Authorization', 'Basic ' + btoa(this.auth.getLogin() + ':' + this.auth.getPassword()));
+        // options.withCredentials = true;
+        headers.append('Authorization', 'Basic ' + btoa(this.auth.login + ':' + this.auth.password));
         return options;
     }
 }

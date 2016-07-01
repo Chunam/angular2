@@ -17,6 +17,7 @@ const materialPkgs: string[] = [
   'sidenav',
   'list',
   'card',
+  'tabs',
   'input',
 ];
 

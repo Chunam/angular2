@@ -1,6 +1,6 @@
 .selected {
-    background-color: #CFD8DC !important;
-    color: white;
+    /*background-color: #CFD8DC !important;*/
+    /*color: white;*/
 }
 .heroes {
     margin: 0 0 2em 0;
@@ -44,4 +44,16 @@
     height: 1.8em;
     margin-right: .8em;
     border-radius: 4px 0 0 4px;
+}
+
+.round-button{
+    border-radius: 50%;
+}
+
+md-card.md-list{
+    max-width: 500px;
+}
+
+md-list-item.selected md-icon {
+    color: cadetblue;
 }
