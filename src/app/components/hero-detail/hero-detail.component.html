@@ -7,12 +7,14 @@
         <label>id: </label>{{hero.id}}
       </div>
       <div>
-        <label>name: </label>
-        <!--<input [(ngModel)]="hero.name">-->
+        <!--<label>name: </label>-->
+        <md-icon class="md-16 list-icon" md-list-avatar color="accent">person</md-icon>
         <md-input placeholder="the hero&rsquo;s name" [(ngModel)]="hero.name" name="name">
           <!--<span md-prefix>$&nbsp;</span>
-        <span md-suffix>.00</span>-->
+          <span md-suffix>.00</span>-->
+          <md-hint align="end">find a good name</md-hint>
         </md-input>
+        <md-input placeholder="details" [(ngModel)]="hero.msg" name="detail" readOnly="true"></md-input>
       </div>
 
       <button md-raised-button color="primary" (click)="goBack()">Back</button>

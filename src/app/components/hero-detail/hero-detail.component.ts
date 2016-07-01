@@ -1,9 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, OnDestroy} from '@angular/core';
 import { REACTIVE_FORM_DIRECTIVES, FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import {ROUTER_DIRECTIVES, ActivatedRoute} from '@angular/router';
 import {MD_BUTTON_DIRECTIVES} from '@angular2-material/button';
 import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';
+import {MD_ICON_DIRECTIVES} from '@angular2-material/icon';
+import {Subscription} from 'rxjs/Rx';
 
 import {Hero} from '../../hero';
 import {HeroService} from '../../services/hero.service';
@@ -17,13 +19,16 @@ import {Protected} from '../../directives/protected.directive';
   templateUrl: 'hero-detail.component.html',
   styleUrls: ['hero-detail.component.css'],
   directives: [
+    MD_ICON_DIRECTIVES,
     REACTIVE_FORM_DIRECTIVES,
     MD_CARD_DIRECTIVES,
     MD_BUTTON_DIRECTIVES,
     MD_INPUT_DIRECTIVES,
     Protected]
 })
-export class HeroDetailComponent implements OnInit {
+export class HeroDetailComponent implements OnInit, OnDestroy {
+
+  private subscription: Subscription;
 
   constructor(private heroService: HeroService,
     private route: ActivatedRoute,
@@ -36,7 +41,7 @@ export class HeroDetailComponent implements OnInit {
   ngOnInit() {
     // let id = +this.routeSegment.getParam('id');
     let id = 2;
-    this.route.params
+    this.subscription = this.route.params
       .map(params => params['id'])
       .subscribe((id) => {
         this.heroService
@@ -53,4 +58,9 @@ export class HeroDetailComponent implements OnInit {
       .catch((resp) => this.log.error(resp.status))
       ;
   }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+  
 }
